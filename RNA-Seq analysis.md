@@ -16,4 +16,8 @@ Using this command, the run info and sample info can be combined
 cat PRJNA597017.csv | csvcut -c run_accession,sample_title > run_sample_info.txt
 ```
 
-Want to make a design file to arrange sample names
+We're just interested in the lung samples, so I extracted the required runs before we get the data from the SRA: 
+
+```bash
+cat run_sample_info.txt | grep lung | cut -f 1 -d , > wanted_runs.txt
+```
