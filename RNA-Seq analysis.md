@@ -21,3 +21,16 @@ We're just interested in the lung samples, so I extracted the required runs befo
 ```bash
 cat run_sample_info.txt | grep lung | cut -f 1 -d , > wanted_runs.txt
 ```
+
+Then can run fastq-dump with parallel command to do it for all accessions in the wanted.txt file
+
+```bash
+cat wanted_runs.txt | parallel fastq-dump --split-files {}
+```
+
+We then ran fastq on all samples in the working directory, followed by multiqc to aggregate the results into 1 analysis file 
+```bash
+fastqc *.fastq
+mutiqc .
+```
+The dot just means do this in the current directory.
